@@ -56,10 +56,17 @@ classdef lineMapLocalizer < handle
             err2_Plus0 = fitError(obj,poseVecIn,modelPts);
         
             eps = 1e-9;
-            dp = [eps ;0.0 ;0.0];
-            newPoseVec = poseVecIn.getPose(dp);
+            dpX = [eps ;0.0 ;0.0];
+            newPoseVecX = poseVecIn.getPose+dpX;
+            dpY = [0.0;eps ;0.0];
+            newPoseVecY = poseVecIn.getPose+dpY;
+            dpTh = [0.0 ;0.0 ;eps];
+            newPoseVecTh = poseVecIn.getPose+dpTh;
             % Fill me in...
-            
+            delEdelX = 1/eps * (fitError(obj,newPoseVecX,modelPts) - err2_Plus0);
+            delEdelY = 1/eps * (fitError(obj,newPoseVecY,modelPts) - err2_Plus0);
+            delEdelTheta = 1/eps * (fitError(obj,newPoseVecTh,modelPts) - err2_Plus0);
+            J = [delEdelX; delEdelY; delEdelTheta];
         end
         
         function[success, outPose] ...
