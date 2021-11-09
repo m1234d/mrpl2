@@ -73,6 +73,19 @@ classdef lineMapLocalizer < handle
             % occursthereafter.
             
             % Fill me in...
+            pose = inPose;
+            
+            success = false;
+            for i=1:maxIters
+                e = fitError(obj, pose, ptsInModelFrame);
+                if e > obj.gradThresh
+                    success = true;
+                    break;
+                end
+                diff = -obj.gain*getJacobian(obj, pose, ptsInModelFrame);
+                pose = pose + diff;
+            end
+            outPose = pose;
         end
         
     end

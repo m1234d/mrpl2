@@ -2,14 +2,11 @@ rIF = robotIF(0, true);
 
 
 
-% Set up linesp1 = [-2 ;
- -2];
-p2 = [ 2 ;
- -2];
-p3 = [ 2 ;
-  2];
-p4 = [-2 ;
-  2];
+% Set up lines
+p1 = [-2 ;-2];
+p2 = [ 2 ;-2];
+p3 = [ 2 ; 2];
+p4 = [-2 ;2];
 lines_p1 = [p1 p2 p3 p4];
 lines_p2 = [p2 p3 p4 p1];
 % Set up test pointsnPts = 10;
